@@ -15,11 +15,11 @@ import java.net.URL;
 public class NetCacheUtils {
 
 	private LocalCacheUtils mLocalCacheUtils;
-	private MemoryCacheUtils mMemoryCacheUtils;
+	//private MemoryCacheUtils mMemoryCacheUtils;
 
-	public NetCacheUtils(LocalCacheUtils localCacheUtils, MemoryCacheUtils memoryCacheUtils) {
+	public NetCacheUtils(LocalCacheUtils localCacheUtils/*, MemoryCacheUtils memoryCacheUtils*/) {
 		mLocalCacheUtils = localCacheUtils;
-		mMemoryCacheUtils = memoryCacheUtils;
+		//mMemoryCacheUtils = memoryCacheUtils;
 	}
 
 	/**
@@ -68,11 +68,12 @@ public class NetCacheUtils {
 			if (result != null) {
 				ivPic.setImageBitmap(result);
 				LogUtils.e("从网络缓存图片啦.....");
-
+				//保存至内存中
+				//mMemoryCacheUtils.setBitmapToMemory(url, result);
+				MemoryCacheUtils.getInstance().setBitmapToMemory(url,result);
 				//从网络获取图片后,保存至本地缓存
 				mLocalCacheUtils.setBitmapToLocal(url, result);
-				//保存至内存中
-				mMemoryCacheUtils.setBitmapToMemory(url, result);
+				
 
 			}
 		}

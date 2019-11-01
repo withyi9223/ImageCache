@@ -3,6 +3,7 @@ package zy.com.cache;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,13 +29,25 @@ public class MainActivity extends AppCompatActivity {
 
 		final String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE,
 				Manifest.permission.READ_EXTERNAL_STORAGE};
+
+		final LruCache<String,String> lruCache=new LruCache<>((int) (Runtime.getRuntime().maxMemory()/8));
+		
 		
 		mTextView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				ActivityCompat.requestPermissions(MainActivity.this,permissions,101);
+				//lruCache.put("zengyi","hahaha");
 			}
 		});
+		
+		/*mImageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(MainActivity.this, lruCache.get("zengyi")
+						, Toast.LENGTH_SHORT).show();;
+			}
+		});*/
 	}
 
 
